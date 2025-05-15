@@ -26,7 +26,7 @@ and the backend part
 
 
 
-use of ai has been done is mostly styling the page and in the html part and to big bugs after multiple faliled attempts. I can assure you that 95% of what code has been written is very well understood and mostly written by me. 
+use of ai has been done is mostly styling the page and in the html part and to big bugs after multiple faliled attempts. I can assure you that 95% of what code has been written is very well understood and mostly written by me with the go part 90% written by me.
 
 Ujjwal Prakash
 241111
