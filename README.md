@@ -21,10 +21,10 @@ and the backend part
    } via postman or related software
    3. the ui for the dashboard pages get updated on every realted and when there is data in csv file.
   
-3. the csv file gets updated everytime the server start i.e a new file is created\
+3. the csv file gets updated everytime the server start i.e a new file is created
 
 
-
+I am also the part of pclubs campus compass project and would be doing learning react and full mern stack 
 
 use of ai has been done is mostly styling the page and in the html part and to big bugs after multiple faliled attempts. I can assure you that 95% of what code has been written is very well understood and mostly written by me with the go part 90% written by me.
 
