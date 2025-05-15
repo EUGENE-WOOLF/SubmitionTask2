@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Placement Insights</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <header>
+        <h1>Student Placement Insights</h1>
+    </header>
+
+    <form id="myForm">
+        <div>
+            <h2>Student Info</h2>
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="username" placeholder="Enter your name" required />
+
+            <label for="studentEmail">Student Email:</label>
+            <input type="email" id="studentEmail" name="email" placeholder="Enter your email" required />
+
+            <label for="studentRollNo">Roll Number:</label>
+            <input type="number" id="studentRollNo" name="rollNo" required />
+
+            <label for="studentDepartment">Department:</label>
+            <input type="text" id="studentDepartment" name="department" required />
+
+            <label for="studentCpi">Current CPI:</label>
+            <input type="number" id="studentCpi" name="cpi" step="0.01" required />
+        </div>
+
+        <div>
+            <h2>Company Info and Tips</h2>
+            <label for="company">Company Name:</label>
+            <input type="text" id="company" name="company" required />
+
+            <label for="role">Role Offered:</label>
+            <input type="text" id="role" name="role" required />
+
+            <label for="selection">Selection Process Highlights:</label>
+            <textarea id="selection" name="selection" rows="4" required></textarea>
+
+            <label for="preparation">Preparation Strategy:</label>
+            <textarea id="preparation" name="preparation" rows="4" required></textarea>
+
+            <label for="tips">Reflections or Tips for Future Students:</label>
+            <textarea id="tips" name="tips" rows="4" required></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("myForm");
+            setTimeout(() => {
+                form.classList.add("visible");
+            }, 300);
+        });
+
+        // Optional: Form submit feedback
+        document.getElementById("myForm").addEventListener("submit", (e) => {
+            e.preventDefault(); // prevent real submission
+            alert("Insight submitted successfully 🚀");
+        });
+
+
+        const form = document.getElementById("myForm");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Parsing data to objects
+            const formData = {
+                studentName: form.username.value,
+                studentRollNo: parseInt(form.rollNo.value),
+                studentEmail: form.email.value,
+                studentDepartment: form.department.value,
+                studentCpi: parseFloat(form.cpi.value),
+                companyName: form.company.value,
+                companyRoleOffered: form.role.value,
+                companySelectionHighlights: form.selection.value,
+                companyPrepStrategy: form.preparation.value,
+                companyTips: form.tips.value
+
+            };
+
+
+            try {
+                const res = await fetch("http://localhost:3000/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (res.ok) {
+                    alert("Insight submitted successfully");
+                    form.reset();
+                } else {
+                    alert("Submission failed");
+                }
+            } catch (err) {
+                console.error("Error submitting form:", err);
+                alert("Error connecting to server.");
+            }
+        });
+    </script>
+</body>
+
+</html>

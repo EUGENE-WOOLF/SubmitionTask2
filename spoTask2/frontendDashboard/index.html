@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Summary</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        #addingStudentData {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .student-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            max-width: 400px;
+            width: 100%;
+            transition: transform 0.2s ease;
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .student-card h2 {
+            margin: 0 0 0.5rem;
+            font-size: 1.2rem;
+            color: #34495e;
+        }
+
+        .student-card p {
+            margin: 0.4rem 0;
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Placement Summary</h1>
+    <div id="addingStudentData"></div>
+
+    <script>
+        async function fetchSummary() {
+            try {
+                const res = await fetch("http://localhost:3000/summary", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (!res.ok) throw new Error("Failed to fetch summary");
+
+                const data = await res.json();
+                console.log("Fetched summary data:", data);
+
+                const container = document.querySelector("#addingStudentData");
+
+                data.forEach((student, index) => {
+                    const studentHTML = `
+                        <div class="student-card">
+                            <h2>Student #${index + 1}</h2>
+                            <p><span class="label">Name:</span> ${student.studentName}</p>
+                            <p><span class="label">Roll No:</span> ${student.studentRollNo}</p>
+                            <p><span class="label">Email:</span> ${student.studentEmail}</p>
+                            <p><span class="label">Department:</span> ${student.studentDepartment}</p>
+                            <p><span class="label">CPI:</span> ${student.studentCpi}</p>
+                            <p><span class="label">Company:</span> ${student.companyName}</p>
+                            <p><span class="label">Role:</span> ${student.companyRoleOffered}</p>
+                            <p><span class="label">Highlights:</span> ${student.companySelectionHighlights}</p>
+                            <p><span class="label">Strategy:</span> ${student.companyPrepStrategy}</p>
+                            <p><span class="label">Tips:</span> ${student.companyTips}</p>
+                        </div>
+                    `;
+                    container.innerHTML += studentHTML;
+                });
+
+            } catch (err) {
+                console.error("Error fetching summary:", err);
+            }
+        }
+
+        fetchSummary();
+    </script>
+</body>
+
+</html>
